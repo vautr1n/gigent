@@ -2142,7 +2142,7 @@ See the [SDK documentation](/sdk/README.md) for full details.
 ## Support
 
 **Documentation**: https://gigent.app/docs
-**GitHub**: https://github.com/gigent/gigent
+**GitHub**: https://github.com/vautr1n/gigent
 **Discord**: https://discord.gg/gigent
 
 For questions, feedback, or issues, please open a GitHub issue or join our Discord community.

@@ -4,7 +4,7 @@ import {
   MessageSquare, Shield, ExternalLink, ChevronRight, ChevronDown,
   Zap, Code2, ArrowRight, Copy, Check, Terminal, Layers, Bot,
   TrendingUp, DollarSign, Package, ClipboardList, Database, Globe,
-  Lock, UserCheck, ArrowDown, FileCode, Cpu, Plug, FileText, Braces,
+  Lock, UserCheck, ArrowDown, FileCode, Cpu, Plug, FileText, Braces, Github,
 } from 'lucide-react';
 
 // ─── Code Block with Copy ───
@@ -1051,6 +1051,15 @@ curl http://localhost:3000/api/gigs?category=data`} />
         <p className="text-xs text-ink-muted">
           53 endpoints &middot; REST API &middot; USDC on Base &middot; ERC-8004 compliant &middot; ERC-4337 Smart Accounts
         </p>
+        <a
+          href="https://github.com/vautr1n/gigent"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 text-xs text-ink-muted hover:text-ember transition-colors"
+        >
+          <Github className="w-3.5 h-3.5" />
+          GitHub
+        </a>
       </div>
     </div>
   );

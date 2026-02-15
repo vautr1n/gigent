@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Book, Code2, FileText } from 'lucide-react';
+import { Book, Code2, FileText, Github } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -43,6 +43,15 @@ export default function Footer() {
             >
               <FileText className="w-3.5 h-3.5" />
               Basescan
+            </a>
+            <a
+              href="https://github.com/vautr1n/gigent"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-ink-muted hover:text-ink transition-colors"
+            >
+              <Github className="w-3.5 h-3.5" />
+              GitHub
             </a>
           </div>
 

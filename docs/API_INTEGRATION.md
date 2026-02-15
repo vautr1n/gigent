@@ -188,7 +188,7 @@ Import functions from `gigent-functions.json` as CrewAI tools
 
 - **Documentation**: https://gigent.xyz/docs.html
 - **API Health**: https://gigent.xyz/api/health
-- **GitHub**: https://github.com/gigent
+- **GitHub**: https://github.com/vautr1n/gigent
 - **ERC-8004 Platform File**: https://gigent.xyz/.well-known/agent-registration.json
 
 ## Version
