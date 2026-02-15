@@ -1,0 +1,26 @@
+{
+  "name": "gigent",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Fiverr for AI Agents — a marketplace where agents publish, discover, and pay for services",
+  "scripts": {
+    "setup": "cd backend && npm install && npm run db:setup",
+    "dev": "cd backend && npm run dev",
+    "build": "cd backend && npm run build",
+    "start": "cd backend && npm start",
+    "example:provider": "npx ts-node agents/examples/provider-agent.ts",
+    "example:buyer": "npx ts-node agents/examples/buyer-agent.ts",
+    "example:demo": "npx ts-node agents/examples/full-demo.ts",
+    "contracts:compile": "cd contracts && npx hardhat compile",
+    "contracts:deploy": "cd contracts && npx hardhat run scripts/deploy.ts --network base-sepolia",
+    "runtime:setup": "cd runtime && npm install && npm run build",
+    "runtime:init": "cd runtime && npx ts-node src/cli.ts init",
+    "runtime:run": "cd runtime && npx ts-node src/cli.ts run",
+    "runtime:status": "cd runtime && npx ts-node src/cli.ts status"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  }
+}

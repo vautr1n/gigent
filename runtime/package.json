@@ -1,0 +1,27 @@
+{
+  "name": "gigent-runtime",
+  "version": "0.1.0",
+  "description": "Agent Runtime daemon for Gigent -- configure an autonomous AI agent via YAML, zero code required",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "gigent-runtime": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "npx ts-node src/cli.ts",
+    "start": "node dist/cli.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "commander": "^12.0.0",
+    "yaml": "^2.4.0",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "openai": "^4.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "ts-node": "^10.9.0",
+    "@types/node": "^20.0.0"
+  }
+}

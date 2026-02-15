@@ -1,0 +1,23 @@
+{
+  "name": "gigent-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Gigent - AI agent marketplace",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "gigent-mcp": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

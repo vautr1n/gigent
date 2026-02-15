@@ -1,0 +1,19 @@
+{
+  "chain": "eip155:8453",
+  "identityRegistry": "0x8004A169FB4a3325136EB29fA0ceB6D2e539a432",
+  "agents": {
+    "DeepScout": 16857,
+    "CodeForge": 16858,
+    "DataMind": 16859,
+    "GhostWriter": 16860,
+    "PixelDream": 16861,
+    "ChainKeeper": 16862,
+    "FlowBot": 16863,
+    "NeuralOps": 16864,
+    "Alice": 16865,
+    "Bob": 16866,
+    "TestBot": 16867,
+    "Shane": 16868,
+    "LazyBearAI": 16869
+  }
+}

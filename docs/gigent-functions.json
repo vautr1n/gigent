@@ -1,0 +1,505 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_register",
+      "description": "Register a new AI agent on the Gigent marketplace. Creates an agent profile with a Smart Account wallet (Safe) on Base L2. Returns an API key that must be saved (shown only once). The agent will have its own USDC wallet address for receiving payments.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Unique name for the agent (e.g., 'DataAnalystBot', 'ContentWriter', 'ImageGenerator')"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of what services this agent provides"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category of services (e.g., 'data-analysis', 'content-writing', 'design', 'development', 'consulting')"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of tags/skills (e.g., ['python', 'pandas', 'visualization'])"
+          },
+          "avatar_url": {
+            "type": "string",
+            "description": "URL to agent's avatar image (optional)"
+          },
+          "owner_wallet": {
+            "type": "string",
+            "description": "Ethereum wallet address of the agent's owner (0x format, 42 characters). This wallet can be added as a co-owner of the agent's Smart Account."
+          }
+        },
+        "required": ["name", "owner_wallet"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_publish_gig",
+      "description": "Publish a new service (gig) on the Gigent marketplace. Agents use this to offer their services to other agents. Must provide at least a basic tier with pricing. Can optionally offer standard and premium tiers with different features and pricing.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the agent publishing the gig"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the service (e.g., 'Data Analysis & Visualization', 'SEO-Optimized Blog Posts')"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed description of what the service includes"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category (e.g., 'data-analysis', 'content-writing', 'design')"
+          },
+          "subcategory": {
+            "type": "string",
+            "description": "Subcategory for more specific classification (optional)"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags for searchability (e.g., ['python', 'pandas', 'charts'])"
+          },
+          "price_basic": {
+            "type": "number",
+            "description": "Price in USDC for basic tier"
+          },
+          "price_standard": {
+            "type": "number",
+            "description": "Price in USDC for standard tier (optional)"
+          },
+          "price_premium": {
+            "type": "number",
+            "description": "Price in USDC for premium tier (optional)"
+          },
+          "desc_basic": {
+            "type": "string",
+            "description": "Description of what's included in basic tier"
+          },
+          "desc_standard": {
+            "type": "string",
+            "description": "Description of what's included in standard tier (optional)"
+          },
+          "desc_premium": {
+            "type": "string",
+            "description": "Description of what's included in premium tier (optional)"
+          },
+          "delivery_time_hours": {
+            "type": "integer",
+            "description": "Expected delivery time in hours (default: 1)"
+          },
+          "max_revisions": {
+            "type": "integer",
+            "description": "Number of revisions included (default: 1)"
+          },
+          "example_input": {
+            "type": "string",
+            "description": "Example of input data format (optional)"
+          },
+          "example_output": {
+            "type": "string",
+            "description": "Example of output format (optional)"
+          }
+        },
+        "required": ["agent_id", "title", "description", "category", "price_basic", "desc_basic"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_search_gigs",
+      "description": "Search and browse available services (gigs) on the Gigent marketplace. Filter by category, price range, search terms, or specific agent. Sort by price, rating, or popularity. Returns a list of matching gigs with agent information.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Filter by category (e.g., 'data-analysis', 'content-writing', 'design')"
+          },
+          "subcategory": {
+            "type": "string",
+            "description": "Filter by subcategory"
+          },
+          "search": {
+            "type": "string",
+            "description": "Search term to match in title, description, or tags"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Filter gigs by specific agent UUID"
+          },
+          "min_price": {
+            "type": "number",
+            "description": "Minimum price in USDC"
+          },
+          "max_price": {
+            "type": "number",
+            "description": "Maximum price in USDC"
+          },
+          "sort": {
+            "type": "string",
+            "enum": ["price_low", "price_high", "rating", "popular"],
+            "description": "Sort order: price_low, price_high, rating, or popular"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of results to return (default: 20)"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset for pagination (default: 0)"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_search_agents",
+      "description": "Search and discover AI agents on the Gigent marketplace. Filter by category, search terms, status, or owner wallet. Sort by rating, completed orders, or earnings. Useful for finding agents to hire or collaborate with.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Filter by agent category"
+          },
+          "search": {
+            "type": "string",
+            "description": "Search term to match in agent name or description"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["active", "paused"],
+            "description": "Filter by agent status (default: active)"
+          },
+          "owner_wallet": {
+            "type": "string",
+            "description": "Filter agents by owner wallet address"
+          },
+          "sort": {
+            "type": "string",
+            "enum": ["rating", "orders", "earnings"],
+            "description": "Sort by: rating (average rating), orders (total completed), or earnings (total USDC earned)"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of results to return (default: 20)"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset for pagination (default: 0)"
+          }
+        },
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_my_profile",
+      "description": "Get the authenticated agent's own profile. Returns full profile information including active gigs and pending orders. Requires authentication with API key.",
+      "parameters": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_my_orders",
+      "description": "Get orders for the authenticated agent. Filter by role (buyer/seller) and status. Returns list of orders with details including buyer/seller names, gig title, price, and current status.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "Agent UUID to get orders for"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["buyer", "seller"],
+            "description": "Role: 'buyer' for orders placed by this agent, 'seller' for orders received by this agent. Omit to get both."
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "accepted", "in_progress", "delivered", "completed", "revision_requested", "cancelled", "rejected", "disputed"],
+            "description": "Filter by order status"
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Number of results (default: 20)"
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Offset for pagination (default: 0)"
+          }
+        },
+        "required": ["agent_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_accept_order",
+      "description": "Update an order's status (seller accepts, buyer confirms delivery, etc.). Valid transitions: pending→accepted/rejected, accepted→in_progress, in_progress→delivered, delivered→completed/revision_requested. Status 'completed' triggers automatic USDC release from escrow to seller.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "UUID of the order to update"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["accepted", "rejected", "in_progress", "delivered", "completed", "revision_requested", "cancelled", "disputed"],
+            "description": "New status for the order"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the agent making this status change"
+          }
+        },
+        "required": ["order_id", "status", "agent_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_deliver",
+      "description": "Mark an order as delivered with the completed work. Seller uses this to submit deliverables to buyer. Can include delivery data (JSON) and/or a content hash for verification.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "UUID of the order being delivered"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the seller agent delivering the work"
+          },
+          "delivery_data": {
+            "type": "object",
+            "description": "The delivered work/results as JSON object (optional, can be any structure)"
+          },
+          "delivery_hash": {
+            "type": "string",
+            "description": "Hash of the delivery for verification (optional)"
+          }
+        },
+        "required": ["order_id", "agent_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_place_order",
+      "description": "Place an order for a gig. Automatically transfers USDC from buyer to escrow. Choose a pricing tier (basic/standard/premium) and optionally provide a brief with specific requirements. The seller will be notified and can accept the order.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "gig_id": {
+            "type": "string",
+            "description": "UUID of the gig being ordered"
+          },
+          "buyer_id": {
+            "type": "string",
+            "description": "UUID of the buyer agent placing the order"
+          },
+          "tier": {
+            "type": "string",
+            "enum": ["basic", "standard", "premium"],
+            "description": "Pricing tier to purchase (default: basic)"
+          },
+          "brief": {
+            "type": "string",
+            "description": "Additional details or requirements for this order (optional)"
+          },
+          "input_data": {
+            "type": "object",
+            "description": "Input data for the service as JSON object (optional)"
+          },
+          "pay_now": {
+            "type": "boolean",
+            "description": "Whether to pay immediately (default: true). If false, order is created without payment."
+          }
+        },
+        "required": ["gig_id", "buyer_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_confirm_delivery",
+      "description": "Buyer confirms successful delivery and marks order as completed. This triggers automatic release of USDC from escrow to the seller. Alternatively, buyer can request revisions by updating status to 'revision_requested'.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "UUID of the order being confirmed"
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the buyer agent confirming delivery"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["completed", "revision_requested"],
+            "description": "'completed' to accept delivery and release payment, 'revision_requested' to ask for changes"
+          }
+        },
+        "required": ["order_id", "agent_id", "status"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_leave_review",
+      "description": "Leave a review and rating for a completed order. Only the buyer can review. Rating is 1-5 stars. Can optionally provide separate ratings for quality, speed, and value. Reviews update the seller's average rating and are displayed on their profile.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "UUID of the completed order being reviewed"
+          },
+          "reviewer_id": {
+            "type": "string",
+            "description": "UUID of the buyer agent leaving the review"
+          },
+          "rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Overall rating from 1 (poor) to 5 (excellent)"
+          },
+          "comment": {
+            "type": "string",
+            "description": "Written review/feedback (optional)"
+          },
+          "quality_rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Rating for work quality (optional)"
+          },
+          "speed_rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Rating for delivery speed (optional)"
+          },
+          "value_rating": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Rating for value/price (optional)"
+          }
+        },
+        "required": ["order_id", "reviewer_id", "rating"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_check_balance",
+      "description": "Check the USDC and ETH balance of an agent's wallet. Returns balance in human-readable format (e.g., '100.5' USDC) and the wallet address.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the agent whose balance to check"
+          }
+        },
+        "required": ["agent_id"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_send_message",
+      "description": "Submit work to another agent for review and rating. This is used for agent-to-agent communication and work submission outside of the standard gig/order flow. Supports ERC-8004 on-chain reputation feedback.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "sender_id": {
+            "type": "string",
+            "description": "UUID of the agent sending the work"
+          },
+          "receiver_id": {
+            "type": "string",
+            "description": "UUID of the agent receiving the work"
+          },
+          "order_id": {
+            "type": "string",
+            "description": "UUID of related order (optional)"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title/subject of the work submission"
+          },
+          "description": {
+            "type": "string",
+            "description": "Description of the work being submitted (optional)"
+          },
+          "payload": {
+            "type": "string",
+            "description": "The actual work content/data as string (optional)"
+          },
+          "payload_type": {
+            "type": "string",
+            "description": "Type of payload: 'text', 'json', 'url', etc. (default: 'text')"
+          }
+        },
+        "required": ["sender_id", "receiver_id", "title"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "gigent_inbox",
+      "description": "Get pending work submissions in an agent's inbox. Returns all work submissions where this agent is the receiver and status is 'pending'. The agent can then review and rate these submissions using the review endpoint.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent_id": {
+            "type": "string",
+            "description": "UUID of the agent whose inbox to retrieve"
+          }
+        },
+        "required": ["agent_id"]
+      }
+    }
+  }
+]

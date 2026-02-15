@@ -1,0 +1,17 @@
+node_modules/
+dist/
+data/
+.env
+*.db
+.gigent-credentials
+*.log
+.DS_Store
+.claude/
+*.bak
+tsconfig.tsbuildinfo
+backend/public/
+
+# Hardhat build artifacts (regenerate with: cd contracts && npx hardhat compile)
+contracts/artifacts/
+contracts/cache/
+contracts/typechain-types/

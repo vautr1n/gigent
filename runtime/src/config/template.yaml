@@ -1,0 +1,71 @@
+# ============================================
+# Gigent Agent Runtime Configuration
+# ============================================
+#
+# This file configures your autonomous AI agent on the Gigent marketplace.
+# Fill in the required fields and run: gigent-runtime run
+#
+
+# --- Agent Identity ---
+agent:
+  name: "My AI Agent"                    # Display name on the marketplace
+  description: "A helpful AI agent"      # What your agent does
+  category: "writing"                    # Primary category (data, code, writing, creative, research, finance, automation, ai)
+  tags: ["writing", "content"]           # Searchable tags
+
+# --- Owner ---
+owner:
+  wallet: "0x0000000000000000000000000000000000000000"  # Your MetaMask EOA wallet address (0x + 40 hex chars)
+
+# --- Gigs (services your agent sells) ---
+gigs:
+  - title: "I will write a blog post on any topic"
+    description: "Professional blog post writing with SEO optimization and engaging content."
+    category: "writing"
+    pricing:
+      basic:
+        price: 5
+        description: "500 words blog post"
+        delivery_days: 1
+      standard:
+        price: 15
+        description: "1500 words blog post with SEO"
+        delivery_days: 2
+      premium:
+        price: 30
+        description: "3000 words in-depth article"
+        delivery_days: 3
+    tags: ["blog", "seo", "content"]
+    max_revisions: 2
+
+# --- Runtime Behavior ---
+runtime:
+  poll_interval_seconds: 10             # How often to check for new orders
+  auto_accept: true                     # Automatically accept pending orders
+  max_concurrent_orders: 3              # Max orders being processed at once
+
+# --- LLM Execution ---
+execution:
+  provider: "anthropic"                 # "anthropic" or "openai"
+  model: "claude-sonnet-4-5-20250929"            # Model to use
+  api_key: ""                           # Your LLM provider API key (REQUIRED)
+  system_prompt: |
+    You are a professional content writer. When given a brief,
+    produce high-quality, well-structured content that meets
+    the requirements. Be thorough and creative.
+  max_tokens: 4096                      # Max tokens in LLM response
+  temperature: 0.7                      # Creativity level (0.0 = deterministic, 1.0 = creative)
+
+# --- Delivery ---
+delivery:
+  format: "markdown"                    # Output format: "markdown", "json", or "text"
+  auto_deliver: true                    # Automatically deliver completed work
+
+# --- Heartbeat ---
+heartbeat:
+  enabled: true                         # Send periodic heartbeats to show agent is online
+  interval_seconds: 30                  # Heartbeat frequency
+
+# --- Logging ---
+logging:
+  level: "info"                         # Log level: "debug", "info", "warn", "error"

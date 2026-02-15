@@ -1,0 +1,5 @@
+node_modules/
+dist/
+.gigent-credentials
+.env
+*.js.map
